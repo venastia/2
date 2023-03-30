@@ -1,0 +1,228 @@
+/* общие свойства */
+@font-face {
+    font-family: 'TT Norms Pro Edu Normal';
+    src: url('../fonts/TTNormsProEdu-Normal.woff2') format('woff2'),
+        url('../fonts/TTNormsProEdu-Normal.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'TT Norms Pro Edu Normal', sans-serif;
+  background-color: #E6E6E6;
+  overflow: hidden;
+}
+
+div.overlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+  cursor: pointer;
+}
+
+div.overlay div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 380px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.overlay p {
+  color: #FF6B00;
+  font-size: 78px;
+}
+
+div.overlay img {
+  width: 60px;
+}
+
+.digging {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.figure {
+  position: absolute;
+  z-index: 2;
+/*  zoom: 0.75;*/
+}
+
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.figure#a {
+  left: calc(50% - 840px);
+  bottom: 10px;
+}
+.figure#b {
+  left: calc(50% - 540px);
+  bottom: 275px;
+}
+.figure#c {
+  left: calc(50% - 840px);
+  bottom: 100px;
+}
+.figure#d {
+  left: calc(50% - 580px);
+  bottom: 5px;
+}
+.figure#e {
+  left: calc(50% - 280px);
+  bottom: 5px;
+}
+.figure#f {
+  left: calc(50% - 120px);
+  bottom: 60px;
+}
+.figure#g {
+  left: calc(50% + 180px);
+  bottom: 360px;
+}
+.figure#h {
+  left: calc(50% + 280px);
+  bottom: 0;
+}
+.figure#i {
+  left: calc(50% + 380px);
+  bottom: 260px;
+}
+
+div.blocks {
+/*  background-color: red;*/
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  z-index: 10;
+}
+
+div.row {
+  display: flex;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+div.block {
+  width: 100%;
+  height: 100%;
+  background-color: #FF6B00;
+}
+
+div.text-block {
+  height: 100%;
+  background-color: #E6E6E6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 38px;
+  padding-right: 38px;
+}
+
+div.row#a .text-block p {
+  color: #1C4F2A;
+}
+
+div.text-block p {
+  white-space: nowrap;
+  color: black;
+  font-size: 66px;
+}
+
+.start {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.start div {
+  position: relative;
+}
+
+.start > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.start .u {
+  background-color: #1C4F2A;
+  height: 100%;
+  width: 100%;
+}
+
+.start .d {
+  background-color: white;
+  width: 100%;
+}
+
+.start .l .d {
+  height: 80vh;
+}
+
+.start .r .d {
+  height: 160vh;
+}
+
+.start .u p {
+  position: absolute;
+  font-size: 56px;
+  color: white;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  z-index: 3;
+}
+
+.start img {
+  display: none;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+}
+
+.start > div:hover .d {
+  background-color: #FF6B00;
+}
+
+.start > div:hover p {
+  color: #FF6B00;
+}
+
+.start > div:hover img {
+  display: initial;
+}
+
+.building {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: cyan;
+}
