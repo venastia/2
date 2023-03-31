@@ -275,7 +275,7 @@ div.text-block p {
   gap: 28px;
   align-items: center;
   flex-direction: column;
-  z-index: 10;
+  z-index: 11;
 }
 
 .gameover h1, .gameover p {
