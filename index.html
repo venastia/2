@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <img class="home" src="images/house_button.svg">
   <div class="overlay">
     <div>
       <p></p>
@@ -18,7 +19,18 @@
     </div>
   </div>
   <div class="building">
-    <canvas id="buildGame" width="800" height="600" style="background: #D2D2D2;"></canvas>
+    <h1 class="score">YOUR SCORE: 0</h1>
+    <canvas id="buildGame" width="800" height="600" style='background: #D2D2D2; font-family: "TTNormsProEduNormal"'></canvas>
+    <div class="gameover">
+      <svg class="background" preserveAspectRatio="none" viewBox="0 0 1438 1091" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M-1 379.369L564 0H1438L893 205.47L1438 1086.49L976.5 894.548L161.5 1092L-1 379.369Z" fill="#E6E6E6" />
+      </svg>
+      <div class="text">
+        <h1>game over:(</h1>
+        <p>but it’s okay! click to start again</p>
+      </div>
+    </div>
   </div>
   <div class="digging">
     <div class="blocks">
@@ -79,5 +91,9 @@
       </div>
       <div class="d"></div>
     </div>
+    <!-- <div class="footer">
+      <p>CAVE architecture <break> vedeniapina nastia, 2023</p>
+      <img src="images/" alt="">
+    </div> -->
   </div>
 </body>

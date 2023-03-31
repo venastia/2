@@ -10,6 +10,11 @@ window.addEventListener('load', () => {
   let start = document.querySelector('.start')
   let digging = document.querySelector('.digging')
   let building = document.querySelector('.building')
+  let gameover = document.querySelector('.gameover')
+  let score = document.querySelector('.score')
+  let canvas = document.getElementById("buildGame");
+  let home = document.querySelector('.home')
+
   diggingButton.addEventListener('click', () => {
     display(1)
   })
@@ -20,6 +25,13 @@ window.addEventListener('load', () => {
     display(overlayTo)
     makeOverlay(false)
   })
+  gameover.addEventListener('click', () => {
+    restart();
+    gameover.style['display'] = 'none';
+  })
+  home.addEventListener('click', () => {
+    display(0)
+  })
 
   function display(index) {
     switch (index) {
@@ -27,16 +39,19 @@ window.addEventListener('load', () => {
         start.style['display'] = 'flex'
         digging.style['display'] = 'none'
         building.style['display'] = 'none'
+        home.style['display'] = 'none'
         break
       case 1:
         start.style['display'] = 'none'
         digging.style['display'] = 'flex'
         building.style['display'] = 'none'
+        home.style['display'] = 'initial'
         break
       case 2:
         start.style['display'] = 'none'
         digging.style['display'] = 'none'
         building.style['display'] = 'flex'
+        home.style['display'] = 'initial'
         break
     }
   }
@@ -64,7 +79,7 @@ window.addEventListener('load', () => {
       row.style['opacity'] = '0%'
     })
   }
-  let canvas = document.getElementById("buildGame");
+
   addEventListener("resize", () => {
     canvas.width = innerWidth;    // resize canvas
     canvas.height = innerHeight;
@@ -73,19 +88,19 @@ window.addEventListener('load', () => {
   canvas.height = innerHeight;
   let context = canvas.getContext("2d");
   let scrollCounter, cameraY, current, mode, xSpeed;
-  let ySpeed = 5;
-  let height = 50;
+  let ySpeed = 10;
+  let height = 200;
   let boxes = [];
-  let figure = ["../assets/fugure_1.svg", "../assets/fugure_2.svg", "../assets/fugure_3.svg", "../assets/fugure_4.svg", "../assets/fugure_5.svg"]
+  let figure = ["../images/fugure_1.svg", "../images/fugure_2.svg", "../images/fugure_3.svg", "../images/fugure_4.svg", "../images/fugure_5.svg"]
   function getImage(url) {
     const image = new Image(url)
     image.src = url
     return image;
   }
   boxes[0] = {
-    x: (canvas.width - 150) / 2,
-    y: 300,
-    width: 150,
+    x: (canvas.width - 120) / 2,
+    y: 20,
+    width: 231,
     image: getImage(figure[0])
   };
   function newBox() {
@@ -97,31 +112,20 @@ window.addEventListener('load', () => {
     //     y: (current + 10) * height >= canvas.height ? canvas.height - height : (current + 10) * height
     // }
     boxes[current] = {
-      x: 50,
-      y: (current + 10) * height, // Мы удерживаем наши фигуры на одной высоте когда канвас уходит вниз (за это отвечает cameraY),
-      width: 150,
+      x: 270,
+      y: (current + 1) * height, // Мы удерживаем наши фигуры на одной высоте когда канвас уходит вниз (за это отвечает cameraY),
+      width: 231,
       image: img
     };
   }
   function gameOver() {
     mode = 'gameOver';
-    let background = new Image();
-    background.src = ("../assets/game_over.svg")
-    // onload не дает выполнить код пока с переменной прозводятся какие-либо манипуляции, в нашем случае это объявление пустой Instanse класса img присвоение src
-    background.onload = function () {
-      context.drawImage(background, 0, 0, canvas.width, canvas.height);
-    }
+    gameover.style['display'] = 'initial';
   }
 
   function animate() {
     if (mode != 'gameOver') {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.font = 'bold 50px sans-serif';
-      context.save()
-      context.translate(20, canvas.height / 3); // Перемещение по оси X, Y
-      context.rotate(4.7); // Вращаем наш канвас, пока текст не будет в нужной для нас позиции
-      context.fillText("YOUR SCORE: " + (current - 1), -250, 50) // Пишем текстом кол-во очков, -250 это координата X, 50 координа Y
-      context.restore() // Рестор возобновляет выполнение канваса
       for (let n = 0; n < boxes.length; n++) {
         let box = boxes[n];
         context.drawImage(box.image, box.x, 600 - box.y + cameraY, box.width, height);
@@ -149,27 +153,28 @@ window.addEventListener('load', () => {
             gameOver();
           }
           if (xSpeed > 0) {
-            xSpeed++;
+            xSpeed += 2;
           }
           current++;
           scrollCounter = height;
           newBox();
+          score.innerText = `YOUR SCORE: ${current - 1}`
         }
       }
       if (scrollCounter) {
-        cameraY++;
-        scrollCounter--;
+        cameraY += 2;
+        scrollCounter -= 2;
       }
-      context.fillRect(0, canvas.height - 100, canvas.width, 100);
-      context.fillStyle = '#fff';
-      context.font = '14px sans-serif';
-      context.fillText('vedeniapina nastia', 50, canvas.height - 50);
+      // context.fillRect(0, canvas.height - 100, canvas.width, 100);
+      // context.fillStyle = '#fff';
+      // context.font = '14px sans-serif';
+      // context.fillText('vedeniapina nastia', 50, canvas.height - 50);
 
-      context.fillText('CAVE architecture', canvas.width / 2 - 50, canvas.height - 50);
+      // context.fillText('CAVE architecture', canvas.width / 2 - 50, canvas.height - 50);
 
-      context.fillText('try not to crush the', canvas.width - 150, canvas.height - 70);
-      context.fillText('biulding and to reach', canvas.width - 150, canvas.height - 50);
-      context.fillText('the best score', canvas.width - 150, canvas.height - 30);
+      // context.fillText('try not to crush the', canvas.width - 150, canvas.height - 70);
+      // context.fillText('biulding and to reach', canvas.width - 150, canvas.height - 50);
+      // context.fillText('the best score', canvas.width - 150, canvas.height - 30);
       context.fillStyle = '#247E3E';
     }
     window.requestAnimationFrame(animate); // Заставляем наш браузер обновлять 24 раза в секунду (24 кадра в 1 секунде)
@@ -178,19 +183,16 @@ window.addEventListener('load', () => {
   function restart() {
     mode = 'bounce';
     boxes = [boxes[0]] // Убираем все из массива наших фигур, оставляя только первый элемент (нулевой если быть точнее)
-    cameraY = 0;
+    cameraY = 12;
     scrollCounter = 0;
-    xSpeed = 2;
+    xSpeed = 10;
     current = 1;
     newBox();
+
   }
   canvas.onpointerdown = function () {
     if (mode == 'bounce') {
       mode = 'fall';
-    }
-    else if (mode == 'gameOver') {
-      display(0)
-      restart();
     }
   }
   restart();
