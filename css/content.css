@@ -294,7 +294,7 @@ div.text-block p {
 }
 
 .home {
-  z-index: 11;
+  z-index: 9;
   position: absolute;
   bottom: 10px;
   right: 10px;
