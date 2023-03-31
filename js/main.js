@@ -59,14 +59,14 @@ window.addEventListener('load', () => {
     building.style['display'] = 'none'
   }
   function makeOverlay(shown, text = '', to = 0) {
-    overlay.style['display'] = shown ? 'initial' : 'none'
+    overlay.style['display'] = shown ? 'initial' : 'none' // true:false
     body.style['background-color'] = shown ? '#247E3E' : '#E6E6E6'
     overlayText.innerText = text;
     overlayTo = to
   }
-
-  // display(1)
-
+  if(display(.overlay)){
+    building.style['display'] = 'none'
+  }
   for (let i = rows.length - 1; i >= 0; i--) {
     rows[i].addEventListener('click', () => {
       let row = rows[i]
@@ -104,8 +104,8 @@ window.addEventListener('load', () => {
     image: getImage(figure[0])
   };
   function newBox() {
-    const img = new Image()
-    img.src = figure[Math.floor(Math.random() * figure.length)] // = <img src="../assets/fugure_2.svg" /> в css
+    const img = new Image() // = <img src="...svg" /> в css
+    img.src = figure[Math.floor(Math.random() * figure.length)]
     boxes[current] = {
       x: 270,
       y: (current + 1) * height, //удержание фигур на одной высоте когда канвас уходит вниз (за это отвечает cameraY)
