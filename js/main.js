@@ -91,7 +91,8 @@ window.addEventListener('load', () => {
   let ySpeed = 10;
   let height = 200;
   let boxes = [];
-  let figure = ["../images/fugure_1.svg", "../images/fugure_2.svg", "../images/fugure_3.svg", "../images/fugure_4.svg", "../images/fugure_5.svg"]
+  let figure = ["images/fugure_1.svg", "images/fugure_2.svg", "images/fugure_3.svg", "images/fugure_4.svg", "images/fugure_5.svg"]
+  // let figure = ["../images/fugure_1.svg", "../images/fugure_2.svg", "../images/fugure_3.svg", "../images/fugure_4.svg", "../images/fugure_5.svg"]
   function getImage(url) {
     const image = new Image(url)
     image.src = url
